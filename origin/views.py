@@ -2,6 +2,20 @@ from django.shortcuts import render, get_object_or_404
 from .models import Question, UserResponse
 from .forms import ResponseForm
 
+import re
+
+def calculate_progress(answer, keywords):
+    answer = answer.lower()
+    matched = 0
+    
+    for keyword in keywords:
+        # استفاده از regex برای تطابق دقیق کلمات
+        pattern = r'\b' + re.escape(keyword) + r'\b'
+        if re.search(pattern, answer):
+            matched += 1
+    
+    return (matched / len(keywords)) * 100 if keywords else 0
+
 def answer_question(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     
@@ -11,17 +25,19 @@ def answer_question(request, question_id):
             # محاسبه درصد تطابق
             user_answer = form.cleaned_data['answer'].lower()
             keywords = question.get_keywords_list()
-            matched = sum(1 for k in keywords if k in user_answer)
-            progress = (matched / len(keywords)) * 100 if keywords else 0
-            
-            # ذخیره پاسخ
-            UserResponse.objects.create(
-                user=request.user,
-                question=question,
-                answer=form.cleaned_data['answer'],
-                progress=progress
-            )
-            return render(request, 'result.html', {'progress': progress})
+            progress=calculate_progress(user_answer,keywords)
+            # # ذخیره پاسخ
+            ن
+            # UserResponse.objects.create(
+            #     user=request.user,
+            #     question=question,
+            #     answer=form.cleaned_data['answer'],
+            #     progress=calculate_progress(user_answer,keywords)
+            # )
+            context =  {
+                'progress':progress,
+            }
+            return render(request, 'result.html',context)
     else:
         form = ResponseForm()
     
