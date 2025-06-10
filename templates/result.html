@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="progress" style="height: 30px;">
+    <div class="progress-bar" role="progressbar" 
+         style="width: {{ progress }}%;" 
+         aria-valuenow="{{ progress }}" 
+         aria-valuemin="0" 
+         aria-valuemax="100">
+        {{ progress|floatformat:0 }}%
+    </div>
+</div>
+
+<h3>تحلیل پاسخ:</h3>
+<p>تعداد کلمات کلیدی تطبیق داده شده: {{ matched }} از {{ total_keywords }}</p>
+{% endblock %}  

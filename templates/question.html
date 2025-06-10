@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ question.title }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.answer }}
+    <button type="submit" class="btn btn-primary">محاسبه نتیجه</button>
+</form>
+
+<!-- افزودن ویرایشگر پیشرفته -->
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+{% endblock %}
