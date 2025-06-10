@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Question, UserResponse
+from .models import Question
 from .forms import ResponseForm
 
 import re
@@ -26,14 +26,6 @@ def answer_question(request, question_id):
             user_answer = form.cleaned_data['answer'].lower()
             keywords = question.get_keywords_list()
             progress=calculate_progress(user_answer,keywords)
-            # # ذخیره پاسخ
-            ن
-            # UserResponse.objects.create(
-            #     user=request.user,
-            #     question=question,
-            #     answer=form.cleaned_data['answer'],
-            #     progress=calculate_progress(user_answer,keywords)
-            # )
             context =  {
                 'progress':progress,
             }
