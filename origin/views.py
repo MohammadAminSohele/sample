@@ -26,8 +26,10 @@ def answer_question(request, question_id):
             user_answer = form.cleaned_data['answer'].lower()
             keywords = question.get_keywords_list()
             progress=calculate_progress(user_answer,keywords)
+            unused_keywords = [keyword for keyword in keywords if keyword.lower() not in user_answer]
             context =  {
                 'progress':progress,
+                'unused_keywords':unused_keywords
             }
             return render(request, 'result.html',context)
     else:

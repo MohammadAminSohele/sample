@@ -11,6 +11,12 @@
     </div>
 </div>
 
-<h3>تحلیل پاسخ:</h3>
-{% comment %} <p>تعداد کلمات کلیدی تطبیق داده شده: {{ matched }} از {{ total_keywords }}</p> {% endcomment %}
+<div>
+    
+    {% for keywords in unused_keywords %}
+        <h3>{{keywords}}</h3><br>
+    {% endfor %}
+        
+</div>
+
 {% endblock %}  
