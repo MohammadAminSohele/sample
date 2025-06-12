@@ -21,5 +21,7 @@ from origin import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.Question_List.as_view(), name='Question_List'),
     path('<int:question_id>', views.answer_question, name='answer'),
+    path('catagory/<slug:slug>', views.Question_List_By_Catagory, name='Question_List_By_Catagory'),
 ]

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Question
+from django.views.generic import ListView
+from .models import Question , Catagory
 from .forms import ResponseForm
 
 import re
@@ -39,3 +40,13 @@ def answer_question(request, question_id):
         'question': question,
         'form': form
     })
+
+class Question_List(ListView):
+    template_name = 'question_list.html'
+    queryset=Question.objects.all()
+
+def Question_List_By_Catagory(request, slug):
+    category = get_object_or_404(Catagory, slug=slug)
+    questions = category.questions.all()  # Access related questions via ManyToManyField
+    return render(request, "Question_List_By_Catagory.html", {"category": category, "questions": questions})
+    
