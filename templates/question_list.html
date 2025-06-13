@@ -5,7 +5,7 @@
     <div>
         
         {% for question in object_list %}
-            <li><a href="{% url 'answer' question.id %}">{{question.title}}</a></li>
+            <li><a href="{% url 'answer' question.id %}" target="_blank">{{question.title}}</a></li>
         {% endfor %}
             
     </div>

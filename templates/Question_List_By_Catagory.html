@@ -5,7 +5,7 @@
 <h3 class="alert alert-primary text-center">دسته‌بندی: {{category.title}}</h3>
 <ul>
 {% for question in questions %}
-    <li><a href="{% url 'answer' question.id %}">{{ question.title }}</a></li>
+    <li><a href="{% url 'answer' question.id %}" target="_blank">{{ question.title }}</a></li>
 {% endfor %}
 </ul>
 {% endblock content %}
